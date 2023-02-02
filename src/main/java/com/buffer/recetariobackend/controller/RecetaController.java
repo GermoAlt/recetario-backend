@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin()
 @RestController
@@ -21,6 +22,12 @@ public class RecetaController {
     public ResponseEntity<List<Receta>> getRecetas(){
         List<Receta> recetas = recetasService.getRecetas();
         return ResponseEntity.ok(recetas);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Receta> getRecetaById(@PathVariable String id){
+        Optional<Receta> receta = recetasService.getRecetaById(id);
+        return receta.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/")

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecetasService implements IRecetasService{
@@ -21,6 +22,11 @@ public class RecetasService implements IRecetasService{
     @Override
     public Receta createReceta(RecetaDTO receta) {
         return recetaRepository.save(receta.toReceta());
+    }
+
+    @Override
+    public Optional<Receta> getRecetaById(String id) {
+        return recetaRepository.findById(id);
     }
 
 }
