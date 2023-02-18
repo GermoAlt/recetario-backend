@@ -13,4 +13,8 @@ public interface IRecetasService {
     Receta createReceta(RecetaDTO receta);
 
     Optional<Receta> getRecetaById(String id);
+
+    void deleteRecetaById(String id);
+
+    void updateReceta(Receta receta);
 }

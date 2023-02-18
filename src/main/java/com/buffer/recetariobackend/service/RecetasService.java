@@ -29,4 +29,15 @@ public class RecetasService implements IRecetasService{
         return recetaRepository.findById(id);
     }
 
+    @Override
+    public void deleteRecetaById(String id) {
+        recetaRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateReceta(Receta receta) {
+        recetaRepository.save(receta);
+    }
+
+
 }

@@ -30,10 +30,30 @@ public class RecetaController {
         return receta.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Receta> deleteRecetaById(@PathVariable String id) {
+        Optional<Receta> receta = recetasService.getRecetaById(id);
+        if(receta.isPresent()) {
+            recetasService.deleteRecetaById(id)
+;            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("/")
     public ResponseEntity<Receta> create(@RequestBody RecetaDTO receta){
         Receta recetaNueva = recetasService.createReceta(receta);
         if(recetaNueva == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(recetaNueva);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Receta> update(@RequestBody Receta receta){
+        Optional<Receta> rec = recetasService.getRecetaById(receta.getId());
+        if(rec.isPresent()){
+            recetasService.updateReceta(receta);
+            return ResponseEntity.ok(receta);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
