@@ -1,7 +1,9 @@
 package com.buffer.recetariobackend.entity;
 
 public class Calificacion {
+
     private String comentario;
+
     private int puntuacion;
 
     public Calificacion(String comentario, int puntuacion) {
